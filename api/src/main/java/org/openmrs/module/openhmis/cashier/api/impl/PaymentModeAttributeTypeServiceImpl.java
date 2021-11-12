@@ -13,7 +13,9 @@
  */
 package org.openmrs.module.openhmis.cashier.api.impl;
 
+import java.util.List;
 import org.openmrs.module.openhmis.cashier.api.IPaymentModeAttributeTypeService;
+import org.openmrs.module.openhmis.cashier.api.model.Bill;
 import org.openmrs.module.openhmis.cashier.api.model.PaymentModeAttributeType;
 import org.openmrs.module.openhmis.cashier.api.security.BasicMetadataAuthorizationPrivileges;
 import org.openmrs.module.openhmis.commons.api.entity.impl.BaseMetadataDataServiceImpl;
@@ -32,4 +34,23 @@ public class PaymentModeAttributeTypeServiceImpl extends BaseMetadataDataService
 
 	@Override
 	protected void validate(PaymentModeAttributeType entity) {}
+
+	@Override
+	public PaymentModeAttributeType getById(int entityId) {
+		PaymentModeAttributeType payAttributeType = super.getById(entityId);
+		return payAttributeType;
+	}
+
+	@Override
+	public PaymentModeAttributeType getByUuid(String uuid) {
+		PaymentModeAttributeType payAttributeType = super.getByUuid(uuid);
+		return payAttributeType;
+	}
+
+	@Override
+	public List<PaymentModeAttributeType> getAll() {
+		List<PaymentModeAttributeType> results = super.getAll();
+		return results;
+	}
+
 }

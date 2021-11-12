@@ -92,6 +92,19 @@
 
 			return EntityRestFactory.autocompleteSearch(requestParams, type, 'inventory', 'v1');
 		}
+/* 
+		function getPatient(uuid) {
+			var requestParams = [];
+			requestParams['q'] = q;
+			if (type === 'patient') {
+				requestParams['v'] = "custom:(patientIdentifier:(uuid,identifier)," +
+					"person:(personName))";
+			}
+
+			return EntityRestFactory.autocompleteSearch(requestParams, type, 'inventory', 'v1');
+		} */
+
+
 
 		function searchItems(q) {
 			setBaseUrl("inventory");

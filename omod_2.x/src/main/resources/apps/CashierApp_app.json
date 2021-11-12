@@ -8,7 +8,7 @@
 				"id": "openhmis.cashier.cashierLandingPageLink",
 				"extensionPointId": "org.openmrs.referenceapplication.homepageLink",
 				"type": "link",
-				"label": "Cashier",
+				"label": "openhmis.cashier.page",
 				"url": "openhmis.cashier/cashierLanding.page",
 				"icon": "icon-money",
 				"requiredPrivilege": "App: View Cashier App"
@@ -17,7 +17,7 @@
 				"id": "openhmis.cashier.cashierTasksLink",
 				"extensionPointId": "org.openmrs.module.openhmis.cashier.landing",
 				"type": "link",
-				"label": "Cashier Tasks",
+				"label": "openhmis.cashier.task.page",
 				"url": "openhmis.cashier/cashier/cashierTasksDashboard.page",
 				"icon": "icon-book",
 				"requiredPrivilege": "App: Access Cashier Tasks"
@@ -26,7 +26,7 @@
 				"id": "openhmis.cashier.createBillLink",
 				"extensionPointId": "org.openmrs.module.openhmis.cashier.tasks.dashboard",
 				"type": "link",
-				"label": "Create new bill",
+				"label": "openhmis.cashier.addBill",
 				"url": "openhmis.cashier/cashierBill/entities.page",
 				"icon": "icon-money",
 				"requiredPrivilege": "Task: Create new bill"
@@ -35,7 +35,7 @@
 				"id": "openhmis.cashier.timesheetEntryLink",
 				"extensionPointId": "org.openmrs.module.openhmis.cashier.tasks.dashboard",
 				"type": "link",
-				"label": "Timesheet Entry",
+				"label": "openhmis.cashier.page.timesheet.box.title",
 				"url": "openhmis.cashier/timesheet/entities.page",
 				"icon": "icon-edit",
 				"requiredPrivilege": "Task: Cashier Timesheets"
@@ -44,7 +44,7 @@
 				"id": "openhmis.cashier.reportsLink",
 				"extensionPointId": "org.openmrs.module.openhmis.cashier.tasks.dashboard",
 				"type": "link",
-				"label": "Cashier Reports",
+				"label": "openhmis.cashier.page.reports",
 				"url": "openhmis.cashier/reports/reports.page",
 				"icon": "icon-list-alt",
 				"requiredPrivilege": "Task: View Cashier Reports"
@@ -53,7 +53,7 @@
 				"id": "openhmis.cashier.manageCashierModuleLink",
 				"extensionPointId": "org.openmrs.module.openhmis.cashier.landing",
 				"type": "link",
-				"label": "Manage Cashier Module",
+				"label": "openhmis.cashier.manage.module",
 				"url": "openhmis.cashier/cashier/cashierManageModule.page",
 				"icon": "icon-cogs",
 				"requiredPrivilege": "Task: Manage Cashier Module"
@@ -62,7 +62,7 @@
 				"id": "openhmis.cashier.manageCashierRoleCreationLink",
 				"extensionPointId": "org.openmrs.module.openhmis.cashier.manage.module",
 				"type": "link",
-				"label": "Cashier Role Creation",
+				"label": "openhmis.cashier.admin.role",
 				"url": "module/openhmis/cashier/cashierRole2x.page",
 				"icon": "icon-user",
 				"requiredPrivilege": "Task: Manage Cashier Metadata"
@@ -71,7 +71,7 @@
 				"id": "openhmis.cashier.manageCashPointsLink",
 				"extensionPointId": "org.openmrs.module.openhmis.cashier.manage.module",
 				"type": "link",
-				"label": "Manage Cash Points",
+				"label": "openhmis.cashier.admin.cashPoints",
 				"url": "openhmis.cashier/cashPoint/entities.page",
 				"icon": "icon-money",
 				"requiredPrivilege": "Task: Manage Cashier Metadata"
@@ -80,7 +80,7 @@
 				"id": "openhmis.cashier.managePaymentModesLink",
 				"extensionPointId": "org.openmrs.module.openhmis.cashier.manage.module",
 				"type": "link",
-				"label": "Manage Payment Modes",
+				"label": "openhmis.cashier.admin.paymentModes",
 				"url": "openhmis.cashier/paymentMode/entities.page",
 				"icon": "icon-tasks",
 				"requiredPrivilege": "Task: Manage Cashier Metadata"
@@ -89,7 +89,7 @@
 				"id": "openhmis.cashier.manageReceiptNumberGeneratorLink",
 				"extensionPointId": "org.openmrs.module.openhmis.cashier.manage.module",
 				"type": "link",
-				"label": "Manage Receipt Number Generator ",
+				"label": "openhmis.cashier.admin.receiptNumberGenerator",
 				"url": "module/openhmis/cashier/admin/receiptNumberGenerator2x.page",
 				"icon": "icon-tasks",
 				"requiredPrivilege": "Task: Manage Cashier Metadata"
@@ -98,7 +98,7 @@
 				"id": "openhmis.cashier.settingsLink",
 				"extensionPointId": "org.openmrs.module.openhmis.cashier.manage.module",
 				"type": "link",
-				"label": "Cashier Settings",
+				"label": "openhmis.cashier.setting.header",
 				"url": "module/openhmis/cashier/cashierSettings2x.page",
 				"icon": "icon-cogs",
 				"requiredPrivilege": "Task: Manage Cashier Metadata"

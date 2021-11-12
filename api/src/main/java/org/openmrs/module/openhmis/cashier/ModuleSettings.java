@@ -37,8 +37,7 @@ public class ModuleSettings {
 	public static final String ADJUSTMENT_REASEON_FIELD = "openhmis.cashier.adjustmentReasonField";
 	public static final String ALLOW_BILL_ADJUSTMENT = "openhmis.cashier.allowBillAdjustments";
 	public static final String AUTOFILL_PAYMENT_AMOUNT = "openhmis.cashier.autofillPaymentAmount";
-	public static final String PATIENT_DASHBOARD_2_BILL_COUNT =
-	        "openhmis.cashier.patientDashboard2BillCount";
+	public static final String PATIENT_DASHBOARD_2_BILL_COUNT = "openhmis.cashier.patientDashboard2BillCount";
 	private static final Integer DEFAULT_PATIENT_DASHBOARD_2_BILL_COUNT = 4;
 	public static final String DEPARTMENT_COLLECTIONS_REPORT_ID_PROPERTY = "openhmis.cashier.reports.departmentCollections";
 	public static final String DEPARTMENT_REVENUE_REPORT_ID_PROPERTY = "openhmis.cashier.reports.departmentRevenue";
@@ -46,6 +45,11 @@ public class ModuleSettings {
 	public static final String DAILY_SHIFT_SUMMARY_REPORT_ID_PROPERTY = "openhmis.cashier.reports.dailyShiftSummary";
 	public static final String PAYMENTS_BY_PAYMENT_MODE_REPORT_ID_PROPERTY =
 	        "openhmis.cashier.reports.paymentsByPaymentMode";
+	public static final String PAYMENT_INSURANCE_COVERAGE_PERCENTAGE_UUID = "cashier.payment.insurance.coverage.uuid";
+	public static final String PAYMENT_MODE_CASH_UUID = "cashier.payment.mode.cash.uuid";
+	public static final String PAYMENT_MODE_INSURANCE_UUID = "cashier.payment.mode.insurance.uuid";
+	public static final String PAYMENT_CASH_PATIENT_TYPE_UUID = "cashier.cash.patient.type.uuid";
+	public static final String PAYMENT_INSURANNCE_PATIENT_TYPE_UUID = "cashier.insurance.patient.type.uuid";
 
 	private static AdministrationService administrationService;
 

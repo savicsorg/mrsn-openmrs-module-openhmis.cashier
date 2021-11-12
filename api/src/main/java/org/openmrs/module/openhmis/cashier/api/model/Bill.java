@@ -21,10 +21,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.openmrs.BaseOpenmrsData;
 import org.openmrs.Patient;
 import org.openmrs.Provider;
+import org.openmrs.api.AdministrationService;
 import org.openmrs.api.context.Context;
+import static org.openmrs.module.openhmis.cashier.ModuleSettings.PAYMENT_CASH_PATIENT_TYPE_UUID;
+import static org.openmrs.module.openhmis.cashier.ModuleSettings.PAYMENT_INSURANCE_COVERAGE_PERCENTAGE_UUID;
+import static org.openmrs.module.openhmis.cashier.ModuleSettings.PAYMENT_INSURANNCE_PATIENT_TYPE_UUID;
+import static org.openmrs.module.openhmis.cashier.ModuleSettings.PAYMENT_MODE_CASH_UUID;
+import static org.openmrs.module.openhmis.cashier.ModuleSettings.PAYMENT_MODE_INSURANCE_UUID;
+import org.openmrs.module.openhmis.cashier.api.IPaymentModeAttributeTypeService;
+import org.openmrs.module.openhmis.cashier.api.IPaymentModeService;
 import org.openmrs.module.openhmis.cashier.api.util.PrivilegeConstants;
 import org.openmrs.module.openhmis.inventory.api.model.Item;
 import org.openmrs.module.openhmis.inventory.api.model.ItemPrice;
@@ -33,8 +43,9 @@ import org.openmrs.module.openhmis.inventory.api.model.ItemPrice;
  * Model class that represents a list of {@link BillLineItem}s and {@link Payment}s created by a cashier for a patient.
  */
 public class Bill extends BaseOpenmrsData {
-	public static final long serialVersionUID = 0L;
 
+	public static final long serialVersionUID = 0L;
+	private static final Log LOG = LogFactory.getLog(Bill.class);
 	private Integer billId;
 	private String receiptNumber;
 	private Provider cashier;
@@ -47,6 +58,9 @@ public class Bill extends BaseOpenmrsData {
 	private Set<Bill> adjustedBy;
 	private Boolean receiptPrinted = false;
 	private String adjustmentReason;
+	private IPaymentModeService paymentModeService;
+	private static AdministrationService administrationService;
+	private IPaymentModeAttributeTypeService paymentModeAttributeTypeService;
 
 	public String getAdjustmentReason() {
 		return adjustmentReason;
@@ -257,17 +271,82 @@ public class Bill extends BaseOpenmrsData {
 	}
 
 	public void addPayment(Payment payment) {
-		if (payment == null) {
-			throw new NullPointerException("The payment to add must be defined.");
-		}
+		administrationService = Context.getAdministrationService();
+		paymentModeAttributeTypeService = Context.getService(IPaymentModeAttributeTypeService.class);
+		paymentModeService = Context.getService(IPaymentModeService.class);
+
+		String cashModeUuid = administrationService.getGlobalProperty(PAYMENT_MODE_CASH_UUID);
+		String insuranceModeUuid = administrationService.getGlobalProperty(PAYMENT_MODE_INSURANCE_UUID);
+		String coverageUuid = administrationService.getGlobalProperty(PAYMENT_INSURANCE_COVERAGE_PERCENTAGE_UUID);
+		String cashPatientTypeUuid = administrationService.getGlobalProperty(PAYMENT_CASH_PATIENT_TYPE_UUID);
+		String insPatientTypeUuid = administrationService.getGlobalProperty(PAYMENT_INSURANNCE_PATIENT_TYPE_UUID);
 
 		if (this.payments == null) {
 			this.payments = new HashSet<Payment>();
 		}
+		if (payment == null) {
+			LOG.debug("The payment to add must be defined.");
+			throw new NullPointerException("The payment to add must be defined.");
+		}
 
-		this.payments.add(payment);
-		payment.setBill(this);
+		if (insuranceModeUuid == null) {
+			insuranceModeUuid = "";
+		}
 
+		if (!insuranceModeUuid.trim().equals("") && payment.getInstanceType().getUuid().equals(insuranceModeUuid.trim())) {
+			if (cashModeUuid == null || cashModeUuid.trim().equals("")) {
+				LOG.debug("Cash payment mode uuid not defined");
+				throw new NullPointerException("Cash payment mode uuid not defined");
+			}
+			if (coverageUuid == null || coverageUuid.trim().equals("")) {
+				LOG.debug("Insurance coverage attribut uuid not defined");
+				throw new NullPointerException("Insurance coverage attribut uuid not defined");
+			}
+			if (insPatientTypeUuid == null || insPatientTypeUuid.trim().equals("")) {
+				LOG.debug("Insurance Patient type attribut uuid not defined");
+				throw new NullPointerException("Insurance Patient type attribut uuid not defined");
+			}
+			if (cashPatientTypeUuid == null || cashPatientTypeUuid.trim().equals("")) {
+				LOG.debug("Cash Patient type attribut uuid not defined");
+				throw new NullPointerException("Cash Patient type attribut uuid not defined");
+			}
+
+			BigDecimal percentage = new BigDecimal("0");
+			BigDecimal cashVal = new BigDecimal("0");
+			BigDecimal insuranceVal = new BigDecimal("0");
+			String insurancePatientTypeId = "";
+
+			for (PaymentAttribute attribute : payment.getActiveAttributes()) {
+				if (attribute.getAttributeType().getUuid().equals(coverageUuid.trim())) {
+					percentage = new BigDecimal(attribute.getValue());
+				}
+				if (attribute.getAttributeType().getUuid().equals(insPatientTypeUuid.trim())) {
+					insurancePatientTypeId = attribute.getValue();
+				}
+			}
+
+			insuranceVal = (this.getTotal().multiply(percentage)).divide((new BigDecimal("100")));
+			cashVal = this.getTotal().subtract(insuranceVal);
+
+			PaymentMode mode = paymentModeService.getByUuid(cashModeUuid);
+			Payment pay = new Payment();
+			pay.setInstanceType(mode);
+			pay.setAmount(cashVal);
+			pay.setAmountTendered(pay.getAmount());
+			PaymentModeAttributeType paymentAttributeType = paymentModeAttributeTypeService.getByUuid(cashPatientTypeUuid);
+			pay.addAttribute(paymentAttributeType, insurancePatientTypeId);
+			payment.setAmount(insuranceVal);
+			payment.setAmountTendered(payment.getAmount());
+
+			this.payments.add(payment);
+			payment.setBill(this);
+
+			this.payments.add(pay);
+			pay.setBill(this);
+		} else {
+			this.payments.add(payment);
+			payment.setBill(this);
+		}
 		this.checkPaidAndUpdateStatus();
 	}
 

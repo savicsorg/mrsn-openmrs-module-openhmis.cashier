@@ -15,9 +15,17 @@ package org.openmrs.module.openhmis.cashier;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.openmrs.GlobalProperty;
+import org.openmrs.api.AdministrationService;
+import org.openmrs.api.context.Context;
 import org.openmrs.module.BaseModuleActivator;
 import org.openmrs.module.Module;
 import org.openmrs.module.ModuleFactory;
+import static org.openmrs.module.openhmis.cashier.ModuleSettings.PAYMENT_CASH_PATIENT_TYPE_UUID;
+import static org.openmrs.module.openhmis.cashier.ModuleSettings.PAYMENT_INSURANCE_COVERAGE_PERCENTAGE_UUID;
+import static org.openmrs.module.openhmis.cashier.ModuleSettings.PAYMENT_INSURANNCE_PATIENT_TYPE_UUID;
+import static org.openmrs.module.openhmis.cashier.ModuleSettings.PAYMENT_MODE_CASH_UUID;
+import static org.openmrs.module.openhmis.cashier.ModuleSettings.PAYMENT_MODE_INSURANCE_UUID;
 import org.openmrs.module.openhmis.cashier.api.util.RoundingUtil;
 import org.openmrs.module.openhmis.cashier.web.CashierWebConstants;
 import org.openmrs.module.web.WebModuleUtil;
@@ -26,7 +34,9 @@ import org.openmrs.module.web.WebModuleUtil;
  * This class contains the logic that is run every time this module is either started or stopped.
  */
 public class CashierModuleActivator extends BaseModuleActivator {
+
 	private static final Log LOG = LogFactory.getLog(CashierModuleActivator.class);
+	private AdministrationService adminService;
 
 	/**
 	 * @see BaseModuleActivator#contextRefreshed()
@@ -41,9 +51,49 @@ public class CashierModuleActivator extends BaseModuleActivator {
 	 */
 	@Override
 	public void started() {
+
+		adminService = Context.getAdministrationService();
+		GlobalProperty gp;
+
+		String property = adminService.getGlobalProperty(PAYMENT_INSURANCE_COVERAGE_PERCENTAGE_UUID);
+		if (property == null || property.isEmpty()) {
+			gp = new GlobalProperty(PAYMENT_INSURANCE_COVERAGE_PERCENTAGE_UUID, "");
+			gp.setDescription("OpenHMIS Cashier Module, Patient insurance coverage percentage Payment attibute type uuid");
+			adminService.saveGlobalProperty(gp);
+		}
+
+		property = adminService.getGlobalProperty(PAYMENT_MODE_CASH_UUID);
+		if (property == null || property.isEmpty()) {
+			gp = new GlobalProperty(PAYMENT_MODE_CASH_UUID, "");
+			gp.setDescription("OpenHMIS Cashier Module, Cash payment mode uuid");
+			adminService.saveGlobalProperty(gp);
+		}
+
+		property = adminService.getGlobalProperty(PAYMENT_MODE_INSURANCE_UUID);
+		if (property == null || property.isEmpty()) {
+			gp = new GlobalProperty(PAYMENT_MODE_INSURANCE_UUID, "");
+			gp.setDescription("OpenHMIS Cashier Module, insurance payment mode uuid");
+			adminService.saveGlobalProperty(gp);
+		}
+
+		property = adminService.getGlobalProperty(PAYMENT_CASH_PATIENT_TYPE_UUID);
+		if (property == null || property.isEmpty()) {
+			gp = new GlobalProperty(PAYMENT_CASH_PATIENT_TYPE_UUID, "");
+			gp.setDescription("OpenHMIS Cashier Module,Cash payment patient type uuid");
+			adminService.saveGlobalProperty(gp);
+		}
+
+		property = adminService.getGlobalProperty(PAYMENT_INSURANNCE_PATIENT_TYPE_UUID);
+		if (property == null || property.isEmpty()) {
+			gp = new GlobalProperty(PAYMENT_INSURANNCE_PATIENT_TYPE_UUID, "");
+			gp.setDescription("OpenHMIS Cashier Module,Insurance payment patient type uuid");
+			adminService.saveGlobalProperty(gp);
+		}
+
 		RoundingUtil.setupRoundingDeptAndItem(LOG);
 
 		LOG.info("OpenHMIS Cashier Module Module started");
+
 	}
 
 	/**

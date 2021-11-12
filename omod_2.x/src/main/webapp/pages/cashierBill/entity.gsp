@@ -151,7 +151,7 @@
 		            <div class="col-md-2 "><strong>${ui.message('openhmis.cashier.item.total')}:</strong></div>
 		            <div class="col-md-2 right-justify"><strong>{{totalPayableAmount}}</strong></div>
 	            </div>
-	            <div class="row" ng-show="totalAmountTendered != 0">
+<div class="row" ng-show="totalAmountTendered != 0">
 		            <div class="col-md-8"></div>
 		            <div class="col-md-2 "><strong>${ui.message('openhmis.cashier.payment.detailsTitle.tendered')}:</strong></div>
 		            <div class="col-md-2 right-justify"><strong>{{totalAmountTendered}}</strong></div>
