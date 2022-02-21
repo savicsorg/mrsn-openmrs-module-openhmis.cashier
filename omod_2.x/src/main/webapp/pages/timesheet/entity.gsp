@@ -127,7 +127,7 @@
 			<div class="row">
 				<div class="col-md-4 required">
 					<br/>
-					<span>Select Shift Date</span>
+					<span>${ui.message('openhmis.cashier.page.reports.box.select.shift.date.label')}</span>
 				</div>
 				
 				<div class="col-md-8">

@@ -61,7 +61,7 @@
                     <li class="required">
                         ${ui.includeFragment("uicommons", "field/datetimepicker",
                                 [id           : 'startDate',
-                                 label        : 'Begin Date',
+                                 label        : 'Date de début',
                                  required     : 'required',
                                  formFieldName: 'startDate',
                                  useTime      : false,
@@ -71,7 +71,7 @@
                     <li class="required">
                         ${ui.includeFragment("uicommons", "field/datetimepicker",
                                 [id           : 'endDate',
-                                 label        : 'End Date',
+                                 label        : 'Date de fin',
                                  required     : 'required',
                                  formFieldName: 'endDate',
                                  useTime      : false,
