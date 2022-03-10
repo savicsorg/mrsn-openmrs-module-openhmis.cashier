@@ -190,16 +190,12 @@
                                class="remove" ng-click="removeLineItem(lineItem)">
                     </td>
                     <td ng-class="{'not-valid': lineItem.invalidEntry === true}">
-                        ${ ui.includeFragment("openhmis.commons", "searchFragment", [
-                                typeahead: ["billItem.name for billItem in searchItems(\$viewValue)"],
-                                model: "lineItem.item",
-                                typeaheadOnSelect: "selectItem(\$item, lineItem, \$index)",
-                                typeaheadEditable: "true",
-                                class: ["form-control autocomplete-search input-sm"],
-                                showRemoveIcon: "false",
-                                ngEnterEvent: "addLineItem()",
-                                placeholder: [ui.message('openhmis.commons.general.enterItemSearch')],
-                        ])}
+                        <select ng-model="lineItem.item" class="form-control input-sm"
+                                ng-options="billItem.name for billItem in allItems()"
+                                placeholder="Sélectionnez un article"
+                                ng-change="addLineItem()">
+                            <option value="" ng-if="false"></option>
+                        </select>
                     </td>
                     <td>
                         <input id="quantity-{{\$index}}" class="form-control input-sm right-justify" type="number" ng-model="lineItem.itemQuantity"

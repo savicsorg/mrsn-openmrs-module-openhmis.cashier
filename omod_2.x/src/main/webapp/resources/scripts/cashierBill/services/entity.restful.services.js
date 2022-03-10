@@ -114,6 +114,13 @@
 			requestParams['startIndex'] = 1;
 			return EntityRestFactory.autocompleteSearch(requestParams, 'item');
 		}
+                
+                /* Added by SAVICS SRL */
+                function allItems() {
+			setBaseUrl("inventory");
+			var requestParams = {};
+			return EntityRestFactory.loadEntities(requestParams);
+		}
 
 		function loadBill(module_name, uuid, onLoadBillSuccessful) {
 			setBaseUrl(module_name);
