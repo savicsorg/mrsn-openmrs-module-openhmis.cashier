@@ -41,6 +41,7 @@
 			checkAdjustmentReasonRequired: checkAdjustmentReasonRequired,
 			checkAllowBillAdjustment: checkAllowBillAdjustment,
 			checkAutofillPaymentAmount: checkAutofillPaymentAmount,
+                        allItems: allItems
 		};
 
 		return service;
