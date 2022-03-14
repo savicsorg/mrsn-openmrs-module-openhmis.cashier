@@ -189,9 +189,10 @@
                                title="${ui.message('openhmis.cashier.item.removeTitle')}"
                                class="remove" ng-click="removeLineItem(lineItem)">
                     </td>
+                    <!--/* Edited by SAVICS SRL */-->
                     <td ng-class="{'not-valid': lineItem.invalidEntry === true}">
                         <select ng-model="lineItem.item" class="form-control input-sm"
-                                ng-options="billItem.name for billItem in allItems()"
+                                ng-options="billItem.name for billItem in allItems"
                                 placeholder="Sélectionnez un article"
                                 ng-change="addLineItem()">
                             <option value="" ng-if="false"></option>

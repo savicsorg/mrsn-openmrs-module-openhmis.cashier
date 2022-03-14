@@ -41,7 +41,7 @@
 			checkAdjustmentReasonRequired: checkAdjustmentReasonRequired,
 			checkAllowBillAdjustment: checkAllowBillAdjustment,
 			checkAutofillPaymentAmount: checkAutofillPaymentAmount,
-                        allItems: allItems
+                        loadAllItems: loadAllItems/* Added by SAVICS SRL */
 		};
 
 		return service;
@@ -117,10 +117,10 @@
 		}
                 
                 /* Added by SAVICS SRL */
-                function allItems() {
+                function loadAllItems(onLoadAllItemsSuccessful) {
 			setBaseUrl("inventory");
 			var requestParams = {};
-			return EntityRestFactory.loadEntities(requestParams);
+			EntityRestFactory.loadEntities(requestParams, onLoadAllItemsSuccessful, errorCallback);
 		}
 
 		function loadBill(module_name, uuid, onLoadBillSuccessful) {
