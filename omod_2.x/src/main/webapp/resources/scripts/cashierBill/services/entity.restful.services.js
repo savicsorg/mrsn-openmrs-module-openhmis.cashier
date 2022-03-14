@@ -118,8 +118,10 @@
                 
                 /* Added by SAVICS SRL */
                 function loadAllItems(onLoadAllItemsSuccessful) {
-			setBaseUrl("inventory");
+			setBaseUrl("inventory/item");
 			var requestParams = {};
+                        requestParams['rest_entity_name'] = '';
+                        //requestParams['q'] = "%";
 			EntityRestFactory.loadEntities(requestParams, onLoadAllItemsSuccessful, errorCallback);
 		}
 
