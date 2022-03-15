@@ -192,7 +192,7 @@
                     <!--/* Edited by SAVICS SRL */-->
                     <td ng-class="{'not-valid': lineItem.invalidEntry === true}">
                         <select ng-model="lineItem.item" class="form-control input-sm"
-                                ng-options="billItem.name for billItem in allItems"
+                                ng-options="billItem.name for billItem in allItems track by billItem.uuid"
                                 placeholder="Sélectionnez un article"
                                 ng-change="selectItem(lineItem.item, lineItem, \$index)">
                             <option value="" ng-if="false"></option>
