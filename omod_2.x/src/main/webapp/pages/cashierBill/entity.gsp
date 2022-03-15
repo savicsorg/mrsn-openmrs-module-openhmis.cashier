@@ -194,7 +194,7 @@
                         <select ng-model="lineItem.item" class="form-control input-sm"
                                 ng-options="billItem.name for billItem in allItems"
                                 placeholder="Sélectionnez un article"
-                                ng-change="addLineItem()">
+                                ng-change="selectItem(lineItem.item, lineItem, \$index)">
                             <option value="" ng-if="false"></option>
                         </select>
                     </td>

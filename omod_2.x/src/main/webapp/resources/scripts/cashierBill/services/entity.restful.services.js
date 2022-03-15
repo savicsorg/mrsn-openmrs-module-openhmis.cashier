@@ -121,7 +121,6 @@
 			setBaseUrl("inventory/item");
 			var requestParams = {};
                         requestParams['rest_entity_name'] = '';
-                        //requestParams['q'] = "%";
 			EntityRestFactory.loadEntities(requestParams, onLoadAllItemsSuccessful, errorCallback);
 		}
 
