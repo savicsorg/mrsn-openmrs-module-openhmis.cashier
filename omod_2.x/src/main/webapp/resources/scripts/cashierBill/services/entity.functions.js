@@ -155,14 +155,7 @@
 		}
 
 		function populateExistingLineItems(lineItems, populatedLineItems, $scope) {
-                    console.log("function populateExistingLineItems ----");
-                    console.log(lineItems);
-                    console.log(populatedLineItems);
-                    console.log($scope);
 			for (var i = 0; i < lineItems.length; i++) {
-                            console.log("for ----");
-                            console.log(i);
-                            console.log(lineItems[i]);
 				var lineItem = lineItems[i];
 				var itemPrice = {
 					name: lineItem.priceName,
@@ -175,8 +168,6 @@
 				populatedLineItems.push(lineItemModel);
 
 				$scope.lineItem = lineItemModel;
-                                
-                                console.log($scope.lineItem);
 
 				// load item details
 				$scope.loadItemDetails(lineItem.item.uuid, lineItemModel);
