@@ -93,11 +93,18 @@
                         $scope.assureurFixe = false;
                         console.log("$scope");
                         console.log($scope);
+                        $scope.allItems = [];/* Added by SAVICS SRL */
+
 			//load rounding item if any..
 			CashierBillRestfulService.getRoundingItem(function (roundingItem) {
 				$scope.roundingItem = roundingItem;
 			});
 
+                        /* Added by SAVICS SRL */
+                        CashierBillRestfulService.loadAllItems(function (data) {
+                            $scope.allItems = data.results;
+                        });
+                        
 			if ($scope.entity !== undefined && $scope.entity.patient !== undefined) {
 				$scope.uuid = self.getUuid();
 				$scope.selectExistingPatient = true;

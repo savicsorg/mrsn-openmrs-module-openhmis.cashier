@@ -41,6 +41,7 @@
 			checkAdjustmentReasonRequired: checkAdjustmentReasonRequired,
 			checkAllowBillAdjustment: checkAllowBillAdjustment,
 			checkAutofillPaymentAmount: checkAutofillPaymentAmount,
+                        loadAllItems: loadAllItems/* Added by SAVICS SRL */
 		};
 
 		return service;
@@ -113,6 +114,14 @@
 			requestParams['limit'] = 15;
 			requestParams['startIndex'] = 1;
 			return EntityRestFactory.autocompleteSearch(requestParams, 'item');
+		}
+                
+                /* Added by SAVICS SRL */
+                function loadAllItems(onLoadAllItemsSuccessful) {
+			setBaseUrl("inventory/item");
+			var requestParams = {};
+                        requestParams['rest_entity_name'] = '';
+			EntityRestFactory.loadEntities(requestParams, onLoadAllItemsSuccessful, errorCallback);
 		}
 
 		function loadBill(module_name, uuid, onLoadBillSuccessful) {
