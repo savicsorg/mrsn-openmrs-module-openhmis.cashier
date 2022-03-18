@@ -90,7 +90,9 @@
 			$scope.roundingItem = '';
 			$scope.paymentModeAttributesData = [];
 			$scope.dateCreated = '';
-
+                        $scope.assureurFixe = false;
+                        console.log("$scope");
+                        console.log($scope);
 			//load rounding item if any..
 			CashierBillRestfulService.getRoundingItem(function (roundingItem) {
 				$scope.roundingItem = roundingItem;
@@ -286,6 +288,14 @@
 			if (uuid) {
 				CashierBillRestfulService.loadPaymentModeAttributes(CASHIER_MODULE_NAME, uuid, self.onLoadPaymentModeAttributesSuccessful);
 			}
+                        if($scope.paymentMode.name == "Gratuité"){
+                            document.querySelector('[ng-model="amountTendered"]').disabled = true;
+                            document.querySelector('[ng-model="amountTendered"]').value = 0;
+                            $scope.assureurFixe = true;
+                        } else {
+                            document.querySelector('[ng-model="amountTendered"]').disabled = false;
+                            $scope.assureurFixe = false;
+                        }
 		};
 
 		self.searchPaymentModePatients = self.searchPaymentModePatients || function (q) {

@@ -54,6 +54,8 @@
             <input ng-if="!paymentModeAttribute.required" class="form-control"
                    ng-model="attributes[paymentModeAttribute.uuid].value" ng-enter="processPayment()" />
         </span>
+        
+        
 
         <span ng-if="paymentModeAttribute.format === 'org.openmrs.Concept'">
             <!-- show concepts drop-down -->
@@ -143,5 +145,13 @@
                     class: "form-control",
             ])}
         </span>
+    </li>
+</ul>
+<ul ng-if="assureurFixe" class="table-layout">
+    <li class="required">
+        <span>Assureur</span>
+    </li>
+    <li>
+        <span><input class="form-control" value="ETAT" disabled=""></span>
     </li>
 </ul>
