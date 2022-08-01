@@ -122,7 +122,7 @@
                 </tr>
             </table>
         </fieldset>
-
+            
         <fieldset class="nested" ng-show="STATUS !== 'PENDING'">
             <legend>${ui.message('openhmis.cashier.bill.lineItemsPlural')}</legend>
             <span ng-show="lineItems.length === 0">
@@ -170,6 +170,31 @@
             </div>
         </fieldset>
 
+        <fieldset>
+            <legend>Prescripteur</legend>
+                <p>
+                    <label>Demandeur</label>
+<!--                    <encounterProviderAndRole default="currentUser" encounterRole="1" required="true"/>-->
+                        <select ng-model="providerItem" class="form-control input-sm"
+                                ng-options="providerItem.display for providerItem in allProviders track by providerItem.uuid"
+                                placeholder="Sélectionnez un provider"
+                                ng-change="selectProviderItem(providerItem.item, \$index)">
+                            <option value="" ng-if="false"></option>
+                        </select>
+                </p>
+
+                <p id="location-container">
+                    <label>Service</label>
+<!--                    <encounterLocation required="true" tags="Transfer Location"/>-->
+                                            <select ng-model="locationItem" class="form-control input-sm"
+                                ng-options="locationItem.display for locationItem in allServices track by locationItem.uuid"
+                                placeholder="Sélectionnez un service"
+                                ng-change="selectLocationItem(locationItem.item, \$index)">
+                            <option value="" ng-if="false"></option>
+                        </select>
+                </p>
+        </fieldset>
+            
         <fieldset class="nested" ng-show="STATUS === 'PENDING'">
             <legend>${ui.message('openhmis.cashier.bill.lineItemsPlural')}</legend>
             <table class="line-item">

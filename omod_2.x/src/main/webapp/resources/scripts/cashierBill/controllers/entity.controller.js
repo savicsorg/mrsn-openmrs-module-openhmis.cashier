@@ -94,6 +94,8 @@
                         console.log("$scope");
                         console.log($scope);
                         $scope.allItems = [];/* Added by SAVICS SRL */
+                        $scope.allServices = [];
+                        $scope.allProviders = [];
 
 			//load rounding item if any..
 			CashierBillRestfulService.getRoundingItem(function (roundingItem) {
