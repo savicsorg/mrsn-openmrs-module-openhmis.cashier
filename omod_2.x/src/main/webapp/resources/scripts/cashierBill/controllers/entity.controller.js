@@ -107,6 +107,14 @@
                             $scope.allItems = data.results;
                         });
                         
+                        CashierBillRestfulService.loadAllLocations(function (data) {
+                            $scope.allServices = data.results;
+                        }); 
+                        
+                        CashierBillRestfulService.loadAllProviders(function (data) {
+                            $scope.allProviders = data.results;
+                        });                         
+                        
 			if ($scope.entity !== undefined && $scope.entity.patient !== undefined) {
 				$scope.uuid = self.getUuid();
 				$scope.selectExistingPatient = true;
@@ -380,6 +388,14 @@
 		self.searchItems = self.searchItems || function (search) {
 			return CashierBillRestfulService.searchItems(search);
 		}
+                
+                self.selectProviderItem = self.selectProviderItem || function (selectedProvider, index){
+                    console.log(JSON.stringify('Fournisseur \n'+selectedProvider,null,"\t"));
+                }
+                
+                self.selectLocationItem = self.selectLocationItem || function (selectedLocation, index){
+                    console.log(JSON.stringify('Service \n'+selectedLocation,null,"\t"));
+                }
 
 		self.selectItem = self.selectItem || function (selectedItem, lineItem, index) {
 			$scope.lineItem = {};

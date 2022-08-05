@@ -41,7 +41,9 @@
 			checkAdjustmentReasonRequired: checkAdjustmentReasonRequired,
 			checkAllowBillAdjustment: checkAllowBillAdjustment,
 			checkAutofillPaymentAmount: checkAutofillPaymentAmount,
-                        loadAllItems: loadAllItems/* Added by SAVICS SRL */
+                        loadAllItems: loadAllItems,/* Added by SAVICS SRL */
+                        loadAllLocations:loadAllLocations,
+                        loadAllProviders:loadAllProviders
 		};
 
 		return service;
@@ -123,7 +125,28 @@
                         requestParams['rest_entity_name'] = '';
 			EntityRestFactory.loadEntities(requestParams, onLoadAllItemsSuccessful, errorCallback);
 		}
+                
+		function loadAllProviders ( onLoadProvidersSuccessful) {
+                    var requestParams = [];
+                    requestParams['rest_entity_name'] = '';
+                    //requestParams['limit'] = 100;
+                    EntityRestFactory.setBaseUrl('provider', 'v1');
+                    EntityRestFactory.loadEntities(requestParams,
+                        onLoadProvidersSuccessful,
+                        errorCallback
+                    );
+                }
 
+		function loadAllLocations ( onLoadLocationsSuccessful) {
+                    var requestParams = [];
+                    requestParams['rest_entity_name'] = '';
+                    //requestParams['limit'] = 100;
+                    EntityRestFactory.setBaseUrl('location', 'v1');
+                    EntityRestFactory.loadEntities(requestParams,
+                        onLoadLocationsSuccessful,
+                        errorCallback
+                    );
+                }
 		function loadBill(module_name, uuid, onLoadBillSuccessful) {
 			setBaseUrl(module_name);
 			var requestParams = {};
