@@ -26,6 +26,7 @@ import org.apache.commons.logging.LogFactory;
 import org.openmrs.BaseOpenmrsData;
 import org.openmrs.Patient;
 import org.openmrs.Provider;
+import org.openmrs.Location;
 import org.openmrs.api.AdministrationService;
 import org.openmrs.api.context.Context;
 import static org.openmrs.module.openhmis.cashier.ModuleSettings.PAYMENT_CASH_PATIENT_TYPE_UUID;
@@ -49,6 +50,7 @@ public class Bill extends BaseOpenmrsData {
 	private Integer billId;
 	private String receiptNumber;
 	private Provider cashier;
+        private Location service;
 	private Patient patient;
 	private CashPoint cashPoint;
 	private Bill billAdjusted;

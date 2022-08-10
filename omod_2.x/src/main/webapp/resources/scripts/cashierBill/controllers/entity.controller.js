@@ -95,7 +95,7 @@
                         console.log($scope);
                         $scope.allItems = [];/* Added by SAVICS SRL */
                         $scope.allServices = [];
-                        $scope.allProviders = [];
+                        $scope.serviceLocationUuid ='';
 
 			//load rounding item if any..
 			CashierBillRestfulService.getRoundingItem(function (roundingItem) {
@@ -109,11 +109,7 @@
                         
                         CashierBillRestfulService.loadAllLocations(function (data) {
                             $scope.allServices = data.results;
-                        }); 
-                        
-                        CashierBillRestfulService.loadAllProviders(function (data) {
-                            $scope.allProviders = data.results;
-                        });                         
+                        });                        
                         
 			if ($scope.entity !== undefined && $scope.entity.patient !== undefined) {
 				$scope.uuid = self.getUuid();
@@ -145,6 +141,7 @@
 			$scope.loadPaymentModeAttributes = self.loadPaymentModeAttributes;
 			$scope.searchItems = self.searchItems;
 			$scope.selectItem = self.selectItem;
+                        $scope.selectLocationItem = self.selectLocationItem;
 			$scope.changeItemQuantity = self.changeItemQuantity;
 			$scope.removeLineItem = self.removeLineItem;
 			$scope.formatItemPrice = CashierBillFunctions.formatItemPrice;
@@ -415,6 +412,16 @@
 
 			EntityFunctions.focusOnElement('quantity-' + index);
 		}
+                
+                self.selectLocationItem = selectLocationItem || function(locationItem,index){
+                    if (locationItem !== undefined) {
+                        console.log("Selected Location "+locationItem+"\n Index: "+index);
+                        $scope.serviceLocationUuid = locationItem.uuid;
+                        if ($scope.serviceLocationUuid !== undefined && $scope.serviceLocationUuid !== '') {
+                            $scope.entity.service = $scope.serviceLocationUuid;
+                        }
+                    }
+                }
 
 		self.getConcepts = self.getConcepts || function (uuid) {
 			if (uuid !== undefined) {

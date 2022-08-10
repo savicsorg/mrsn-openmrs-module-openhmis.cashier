@@ -171,16 +171,7 @@
         </fieldset>
 
         <fieldset>
-            <legend>Prescripteur</legend>
-                <p>
-                    <label>Demandeur</label>
-                        <select ng-model="providerItem" class="form-control input-sm"
-                                ng-options="providerItem.display for providerItem in allProviders track by providerItem.uuid"
-                                placeholder="Sélectionnez un provider"
-                                ng-change="selectProviderItem(providerItem, \$index)">
-                            <option value="" ng-if="false"></option>
-                        </select>
-                </p>
+            <legend>Destinataire</legend>
 
                 <p id="location-container">
                     <label>Service</label>
