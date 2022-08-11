@@ -50,7 +50,7 @@ public class Bill extends BaseOpenmrsData {
 	private Integer billId;
 	private String receiptNumber;
 	private Provider cashier;
-        private Location service;
+	private Location service;
 	private Patient patient;
 	private CashPoint cashPoint;
 	private Bill billAdjusted;
@@ -139,6 +139,14 @@ public class Bill extends BaseOpenmrsData {
 
 	public void setCashier(Provider cashier) {
 		this.cashier = cashier;
+	}
+
+	public Location getService() {
+		return service;
+	}
+
+	public void setService(Location service) {
+		this.service = service;
 	}
 
 	public Patient getPatient() {
