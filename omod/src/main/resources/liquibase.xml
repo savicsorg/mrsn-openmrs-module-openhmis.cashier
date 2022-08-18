@@ -839,4 +839,13 @@
 			<column name="sort_order" type="int"><constraints nullable="true"/></column>
 		</addColumn>
 	</changeSet>
+        <changeSet id="openhmis.cashier-v2.2.0-1" author="Maxwell Manga">
+            <comment>Adding the column "location_id" to the table cashier_bill to link the service</comment>
+            <addColumn tableName="cashier_bill">
+                <column name="location_id" type="int"><constraints nullable="true"/></column>
+            </addColumn>
+            <addForeignKeyConstraint constraintName="cashier_cash_bill_location_fk"
+                                     baseTableName="cashier_bill" baseColumnNames="location_id"
+                                     referencedTableName="location" referencedColumnNames="location_id"/>
+        </changeSet>
 </databaseChangeLog>

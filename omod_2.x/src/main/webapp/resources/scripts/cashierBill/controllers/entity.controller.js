@@ -95,6 +95,7 @@
                         console.log($scope);
                         $scope.allItems = [];/* Added by SAVICS SRL */
                         $scope.allServices = [];
+                        $scope.service ='';
                         $scope.serviceLocationUuid ='';
 
 			//load rounding item if any..
@@ -386,12 +387,10 @@
 			return CashierBillRestfulService.searchItems(search);
 		}
                 
-                self.selectProviderItem = self.selectProviderItem || function (selectedProvider, index){
-                    console.log(JSON.stringify('Fournisseur \n'+selectedProvider,null,"\t"));
-                }
-                
                 self.selectLocationItem = self.selectLocationItem || function (selectedLocation, index){
-                    console.log(JSON.stringify('Service \n'+selectedLocation,null,"\t"));
+                    console.log('Service \n');
+                    console.log(JSON.stringify(selectedLocation));
+                    //$scope.serviceLocationUuid = selectedLocation.uuid;
                 }
 
 		self.selectItem = self.selectItem || function (selectedItem, lineItem, index) {

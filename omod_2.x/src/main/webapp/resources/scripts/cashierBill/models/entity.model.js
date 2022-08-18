@@ -25,7 +25,7 @@
 
 		// @Override
 		extended.getModelFields = function() {
-			return ["lineItems", "patient", "payments", "status", "cashPoint"];
+			return ["lineItems", "patient", "payments", "status", "cashPoint", "service"];
 		};
 
 		return extended;
