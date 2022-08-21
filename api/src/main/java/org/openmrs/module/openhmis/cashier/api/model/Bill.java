@@ -45,7 +45,7 @@ import org.openmrs.module.openhmis.inventory.api.model.ItemPrice;
  */
 public class Bill extends BaseOpenmrsData {
 
-	public static final long serialVersionUID = 0L;
+	public static final long serialVersionUID = 01L;
 	private static final Log LOG = LogFactory.getLog(Bill.class);
 	private Integer billId;
 	private String receiptNumber;

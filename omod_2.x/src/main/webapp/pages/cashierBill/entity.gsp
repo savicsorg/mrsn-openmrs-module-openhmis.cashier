@@ -122,7 +122,15 @@
                 </tr>
             </table>
         </fieldset>
-            
+        
+        <fieldset class="nested" ng-show="STATUS !== 'PENDING'">
+            <legend>${ui.message('openhmis.cashier.billLocation.recipient')}</legend>
+            <div class="row">
+                <div class="col-md-8"></div>
+                <div class="col-md-2 "><strong>${ui.message('openhmis.cashier.billLocation')}: </strong></div>
+                <div class="col-md-2 right-justify"><strong>{{selectedLocation.name}}</strong></div>
+            </div>
+        </fieldset>   
         <fieldset class="nested" ng-show="STATUS !== 'PENDING'">
             <legend>${ui.message('openhmis.cashier.bill.lineItemsPlural')}</legend>
             <span ng-show="lineItems.length === 0">
@@ -170,14 +178,13 @@
             </div>
         </fieldset>
 
-        <fieldset>
-            <legend>Destinataire</legend>
-
+       <fieldset class="nested" ng-show="STATUS === 'PENDING'">
+            <legend>${ui.message('openhmis.cashier.billLocation.recipient')}</legend>
                 <p id="location-container">
-                    <label>Service</label>
+                    <label>${ui.message('openhmis.cashier.billLocation')}(*) :</label>
                         <select ng-model="locationItem" class="form-control input-sm"
                                 ng-options="locationItem.display for locationItem in allServices track by locationItem.uuid"
-                                placeholder="Sélectionnez un service"
+                                placeholder=${ui.message('openhmis.cashier.billLocation.placeholder')}
                                 ng-change="selectLocationItem(locationItem, \$index)">
                             <option value="" ng-if="false"></option>
                         </select>

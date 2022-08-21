@@ -95,8 +95,8 @@
                         console.log($scope);
                         $scope.allItems = [];/* Added by SAVICS SRL */
                         $scope.allServices = [];
-                        $scope.service ='';
-                        $scope.serviceLocationUuid ='';
+                        $scope.locationItem ='';
+                        $scope.selectedLocation ={uuid:"",name:""};
 
 			//load rounding item if any..
 			CashierBillRestfulService.getRoundingItem(function (roundingItem) {
@@ -120,6 +120,10 @@
 
 				self.addExistingLineItems();
 				$scope.STATUS = $scope.entity.status;
+                                
+                                if($scope.entity.service !== undefined){
+                                    $scope.locationItem = $scope.entity.service
+                                }
 
 				//load bill
 				CashierBillRestfulService.loadBill(CASHIER_MODULE_NAME, $scope.uuid, self.onLoadBillSuccessful);
@@ -179,6 +183,17 @@
 				return false;
 			} else {
 				$scope.entity.patient = $scope.selectedPatient.uuid;
+			}
+			// validate service
+			if ($scope.selectedLocation.uuid === '') {
+				$scope.submitted = true;
+                                //EMR commons
+				//emr.errorAlert("openhmis.commons.general.requirePatient");
+                                console.log('Service - uuid Empty');
+				return false;
+			} else {
+                            console.log('Save before update Service '+$scope.selectedLocation.uuid);
+				$scope.entity.service = $scope.selectedLocation.uuid;
 			}
 
 			// validate line items
@@ -388,9 +403,13 @@
 		}
                 
                 self.selectLocationItem = self.selectLocationItem || function (selectedLocation, index){
-                    console.log('Service \n');
-                    console.log(JSON.stringify(selectedLocation));
-                    //$scope.serviceLocationUuid = selectedLocation.uuid;
+                    if (selectedLocation !== undefined) {
+                        $scope.selectedLocation.uuid = selectedLocation.uuid;
+                        $scope.selectedLocation.name = selectedLocation.display;
+                        if (selectedLocation.uuid !== undefined && selectedLocation.uuid !== '') {
+                            $scope.entity.service = $scope.selectedLocation.uuid;
+                        }
+                    }
                 }
 
 		self.selectItem = self.selectItem || function (selectedItem, lineItem, index) {
@@ -411,16 +430,6 @@
 
 			EntityFunctions.focusOnElement('quantity-' + index);
 		}
-                
-                self.selectLocationItem = selectLocationItem || function(locationItem,index){
-                    if (locationItem !== undefined) {
-                        console.log("Selected Location "+locationItem+"\n Index: "+index);
-                        $scope.serviceLocationUuid = locationItem.uuid;
-                        if ($scope.serviceLocationUuid !== undefined && $scope.serviceLocationUuid !== '') {
-                            $scope.entity.service = $scope.serviceLocationUuid;
-                        }
-                    }
-                }
 
 		self.getConcepts = self.getConcepts || function (uuid) {
 			if (uuid !== undefined) {
