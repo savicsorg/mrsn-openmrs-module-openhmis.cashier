@@ -567,7 +567,8 @@
 					$scope.cashier = data.person.display;
 				}
 			);
-
+			$scope.selectedLocation.uuid = data.service.uuid;
+			$scope.selectedLocation.name = data.service.display;
 			$scope.cashPoint = data.cashPoint;
 			if (data.billAdjusted !== null) {
 				$scope.billAdjustedUuid = data.billAdjusted.uuid;

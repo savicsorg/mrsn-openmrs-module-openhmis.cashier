@@ -102,7 +102,13 @@
                 showPatientSearchBox: "selectedPatient == ''",
                 changePatient: "STATUS === 'PENDING'"
         ])}
-
+        <fieldset class="nested" ng-show="STATUS !== 'PENDING'">
+            <legend>${ui.message('openhmis.cashier.billLocation.recipient')}</legend>
+            <div class="row">
+                <div class="col-md-2 "><strong>${ui.message('openhmis.cashier.billLocation')}: </strong> &nbsp; {{selectedLocation.name}}</div>
+            </div>
+        </fieldset>
+        
         <fieldset class="nested" ng-show="previousLineItems.length > 0">
             <legend class="previousBillTitle">{{previousBillTitle}}</legend>
             <table class="line-item table-height previous-bill">
