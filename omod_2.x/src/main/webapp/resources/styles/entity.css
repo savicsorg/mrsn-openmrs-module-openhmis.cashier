@@ -331,3 +331,8 @@ fieldset.nested .previous-payment td:nth-child(4){
 fieldset.nested .previous-payment td:nth-child(5){
 	width: 15%;
 }
+
+
+#searchBox {
+	width:300px!important;
+}
