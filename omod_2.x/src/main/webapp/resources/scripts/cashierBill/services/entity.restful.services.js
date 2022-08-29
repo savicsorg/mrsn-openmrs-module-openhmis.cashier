@@ -129,8 +129,10 @@
 		function loadAllLocations ( onLoadLocationsSuccessful) {
                     var requestParams = [];
                     requestParams['rest_entity_name'] = '';
-                    //requestParams['limit'] = 100;
-                    EntityRestFactory.setBaseUrl('location', 'v1');
+                    requestParams['v'] = 'full';
+                    requestParams['startIndex'] = 1;
+                    requestParams['limit'] = 190;
+                    EntityRestFactory.setBaseUrl('location','v1');
                     EntityRestFactory.loadEntities(requestParams,
                         onLoadLocationsSuccessful,
                         errorCallback

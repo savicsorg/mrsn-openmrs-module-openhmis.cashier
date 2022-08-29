@@ -109,7 +109,19 @@
                         });
                         
                         CashierBillRestfulService.loadAllLocations(function (data) {
-                            $scope.allServices = data.results;
+                            //Filter Admission Location
+                            $scope.allServices = data.results.filter(location =>{
+                                var status = false;
+                                if (location.tags.length > 0 ){
+                                    for(let tag of location.tags){
+                                        if (tag.name === 'Admission Location'){
+                                            status = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                return status;
+                            });
                         });                        
                         
 			if ($scope.entity !== undefined && $scope.entity.patient !== undefined) {
